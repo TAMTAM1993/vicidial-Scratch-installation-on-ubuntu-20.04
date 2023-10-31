@@ -10,7 +10,8 @@ apt-get install mariadb-server -y
 sudo apt install apache2 apache2-bin apache2-data libapache2-mod-php5.6 php5.6 php5.6-xcache php5.6-dev php5.6-mbstring php5.6-cli php5.6-common php5.6-json php5.6-mysql php5.6-readline sox lame screen libnet-telnet-perl mariadb-server mariadb-client libelf-dev autogen libtool shtool libdbd-mysql-perl libmysqlclient-dev uuid-dev libssl-dev git curl wget -y
 #Special package for ASTblind and ASTloop(ip_relay need this package)
 apt-get install libc6-i386
-
+#Install Mysql my.cnf 
+wget -O /etc/mysql/conf.d/mysql.cnf https://raw.githubusercontent.com/TAMTAM1993/mysql_my.cnf/main/my.cnf
 #Install Jansson
 cd /usr/src/
 wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
