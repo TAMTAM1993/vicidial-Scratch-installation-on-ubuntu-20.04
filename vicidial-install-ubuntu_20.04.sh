@@ -6,12 +6,21 @@ apt-get install apache2 -y
 apt-get install build-essential -y
 apt-get install mariadb-client-10.3 -y
 apt-get install mariadb-server -y
+sudo apt-get update
+sudo apt-get install libncurses5-dev -y
+sudo apt-get install uuid-dev -y
+sudo apt-get install libxml2-dev -y
+sudo apt-get install libsqlite3-dev -y
+sudo apt-get install libssl-devn -y
+apt-get install subversion libjansson-dev sqlite autoconf automake libxml2-dev libncurses5-dev -y
+#Set Timezone
+timedatectl set-timezone Asia/Kolkata
 #install PHP 5.6 
 sudo apt install apache2 apache2-bin apache2-data libapache2-mod-php5.6 php5.6 php5.6-xcache php5.6-dev php5.6-mbstring php5.6-cli php5.6-common php5.6-json php5.6-mysql php5.6-readline sox lame screen libnet-telnet-perl mariadb-server mariadb-client libelf-dev autogen libtool shtool libdbd-mysql-perl libmysqlclient-dev uuid-dev libssl-dev git curl wget -y
 #Special package for ASTblind and ASTloop(ip_relay need this package)
 apt-get install libc6-i386
 #Install Mysql my.cnf 
-wget -O /etc/mysql/conf.d/mysql.cnf https://raw.githubusercontent.com/TAMTAM1993/mysql_my.cnf/main/my.cnf
+wget -O /etc/mysql/conf.d/mysql.cnf http://download.vicidial.com/ubuntu/ubuntu-my-vici.cnf
 #Install Jansson
 cd /usr/src/
 wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
@@ -29,6 +38,58 @@ cd /usr/bin/
 apt install cpanminus -y
 curl -LOk http://xrl.us/cpanm
 chmod +x cpanm
+cpanm readline --force
+read -p 'Press Enter to continue Install perl modules: '
+
+cpanm -f File::HomeDir
+cpanm -f File::Which
+cpanm CPAN::Meta::Requirements
+cpanm -f CPAN
+cpanm YAML
+cpanm MD5
+cpanm Digest::MD5
+cpanm Digest::SHA1
+cpanm Bundle::CPAN
+cpanm DBI
+cpanm -f DBD::mysql
+cpanm Net::Telnet
+cpanm Time::HiRes
+cpanm Net::Server
+cpanm Switch
+cpanm Mail::Sendmail
+cpanm Unicode::Map
+cpanm Jcode
+cpanm Spreadsheet::WriteExcel
+cpanm OLE::Storage_Lite
+cpanm Proc::ProcessTable
+cpanm IO::Scalar
+cpanm Spreadsheet::ParseExcel
+cpanm Curses
+cpanm Getopt::Long
+cpanm Net::Domain
+cpanm Term::ReadKey
+cpanm Term::ANSIColor
+cpanm Spreadsheet::XLSX
+cpanm Spreadsheet::Read
+cpanm LWP::UserAgent
+cpanm HTML::Entities
+cpanm HTML::Strip
+cpanm HTML::FormatText
+cpanm HTML::TreeBuilder
+cpanm Time::Local
+cpanm MIME::Decoder
+cpanm Mail::POP3Client
+cpanm Mail::IMAPClient
+cpanm Mail::Message
+cpanm IO::Socket::SSL
+cpanm MIME::Base64
+cpanm MIME::QuotedPrint
+cpanm Crypt::Eksblowfish::Bcrypt
+cpanm Crypt::RC4
+cpanm Text::CSV
+cpanm Text::CSV_XS
+
+#Install CPAN Again
 cpanm readline --force
 read -p 'Press Enter to continue Install perl modules: '
 
@@ -100,20 +161,6 @@ cd /usr/src/asterisk
 wget http://download.vicidial.com/required-apps/asterisk-13.29.2-vici.tar.gz  
 tar -xvf asterisk-13.29.2-vici.tar.gz
 cd asterisk-13.29.2
-sudo apt-get update
-sudo apt-get install libncurses5-dev
-
-sudo apt-get update
-sudo apt-get install uuid-dev
-
-sudo apt-get update
-sudo apt-get install libxml2-dev
-
-sudo apt-get update
-sudo apt-get install libsqlite3-dev
-
-sudo apt-get update
-sudo apt-get install libssl-dev
 : ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
 ./configure --libdir=/usr/lib --with-gsm=internal --enable-opus --enable-srtp --with-ssl --enable-asteriskssl --with-pjproject-bundled --without-ogg
 make menuselect/menuselect menuselect-tree menuselect.makeopts
@@ -134,12 +181,12 @@ echo 'Continuing...'
 echo "Installing astguiclient"
 mkdir /usr/src/astguiclient
 cd /usr/src/astguiclient
-apt-get install subversion libjansson-dev sqlite autoconf automake libxml2-dev libncurses5-dev -y
 svn checkout svn://svn.eflo.net/agc_2-X/trunk
 cd /usr/src/astguiclient/trunk
 #Add mysql users and Databases
 echo "%%%%%%%%%%%%%%%Please Enter Mysql Password Or Just Press Enter if you Dont have Password%%%%%%%%%%%%%%%%%%%%%%%%%%"
 mysql -u root -p << MYSQLCREOF
+SET GLOBAL connect_timeout=60;
 CREATE DATABASE asterisk DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 CREATE USER 'cron'@'localhost' IDENTIFIED BY '1234';
 GRANT SELECT,INSERT,UPDATE,DELETE,LOCK TABLES on asterisk.* TO cron@'%' IDENTIFIED BY '1234';
@@ -187,7 +234,7 @@ wget -O /etc/rc.local https://raw.githubusercontent.com/jaganthoutam/vicidial-in
 chmod +x /etc/rc.local
 systemctl start rc-local
 read -p 'Press Enter to Reboot: '
-echo "Restarting Centos"
+echo "Restarting the Server"
 reboot
 
 
