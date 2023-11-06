@@ -1,7 +1,7 @@
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php  -y
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 apt-get install apache2 -y
 apt-get install build-essential -y
 apt-get install mariadb-client-10.3 -y
@@ -11,7 +11,7 @@ sudo apt-get install libncurses5-dev -y
 sudo apt-get install uuid-dev -y
 sudo apt-get install libxml2-dev -y
 sudo apt-get install libsqlite3-dev -y
-sudo apt-get install libssl-devn -y
+sudo apt-get install libssl-dev -y
 apt-get install subversion libjansson-dev sqlite autoconf automake libxml2-dev libncurses5-dev -y
 #Set Timezone
 timedatectl set-timezone Asia/Kolkata
@@ -20,7 +20,7 @@ sudo apt install apache2 apache2-bin apache2-data libapache2-mod-php5.6 php5.6 p
 #Special package for ASTblind and ASTloop(ip_relay need this package)
 apt-get install libc6-i386
 #Install Mysql my.cnf 
-wget -O /etc/mysql/conf.d/mysql.cnf http://download.vicidial.com/ubuntu/ubuntu-my-vici.cnf
+wget -O /etc/mysql/conf.d/mysql.cnf https://raw.githubusercontent.com/TAMTAM1993/mysql_my.cnf/main/my.cnf
 #Install Jansson
 cd /usr/src/
 wget http://www.digip.org/jansson/releases/jansson-2.5.tar.gz
